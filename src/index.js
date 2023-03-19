@@ -1,4 +1,4 @@
-console.log('Confia en tí CAMI');
+console.log('Connectado');
 import Notiflix from 'notiflix';
 Notiflix.Notify.failure('ROJA');
 
