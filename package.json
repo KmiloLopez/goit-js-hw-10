@@ -5,7 +5,8 @@
   "homepage": "https://kmilolopez.github.io/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /goit-js-hw-10/"
+    "build": "parcel build src/*.html --public-url /goit-js-hw-10/",
+    "deploy":"rm -rf dist/ && npm build && gh-pages -d dist"
   },
   "repository": {
     "type": "git",
