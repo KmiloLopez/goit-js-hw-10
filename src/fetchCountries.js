@@ -1,3 +1,18 @@
+
+
+//lo intente mandar aca pero me sale error.
+
+
+
+
+
+
+
+
+
+
+
+
 export let countryTittle
 export function fetchCountries(countryFetched) {
     /* const countryName = countryFetched.name

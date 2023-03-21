@@ -13,14 +13,22 @@ const countryInfo = document.querySelector('.country-info');
 const DEBOUNCE_DELAY = 300;
 let textafterDebounce="a"
 const updateDebounceText = debounce(text=>{
-  textafterDebounce= text
+  textafterDebounce= text.trim()
   console.log("El DEBOUNCE",textafterDebounce)
+  if (textafterDebounce.length === 0){
+    console.log("borrar pantalla")
+    countryList.innerHTML = null;
+    countryInfo.innerHTML = null;
+  
+  }
+  else {
   countrySearch(textafterDebounce)
     .then(countryFetched => {
       //se manda en la posicion cero ya que aca es donde esta la informacion
       fetchCountries(countryFetched);
     })
     .catch(error => console.log(error));
+  }
 }, DEBOUNCE_DELAY)
 
 function debounce(callBack, DEBOUNCE_DELAY){
@@ -42,7 +50,8 @@ imputText.addEventListener('input', e => {
 
 function countrySearch(imputt) {
   let dinamicParameter = imputt;
-  console.log('dinamicParam', dinamicParameter);
+
+    
   return fetch(`https://restcountries.com/v3.1/name/${dinamicParameter}`)
   .then(
     response => {
@@ -54,16 +63,18 @@ function countrySearch(imputt) {
       return response.json();
     }
   );
+
+  
+  
   
 }
 
 function fetchCountries(countryFetched) {
-  /* const countryName = countryFetched.name
-    const countryFlag = countryFetched.flags */
+  
   console.log('lo que encontramos con el nombre fue:', countryFetched);
   console.log('cantidad de elementos encontrados:', countryFetched.length);
   if (countryFetched.length === 1) {//card markup???
-    Notiflix.Notify.success('Sol lucet omnibus');
+    /* Notiflix.Notify.success('Sol lucet omnibus'); */
     let foundCountries = countryFetched;
     console.log('ccfoundCountries contiene:', foundCountries[0].name.common);
     const countryTittle = `<p><img class ="flag-image" src="${foundCountries[0].flags.png}" alt="${foundCountries[0].flags.alt}"width="20"/><h2>${foundCountries[0].name.common}</h2></p>`;
