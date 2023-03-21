@@ -1,10 +1,5 @@
 console.log('Connectado');
 import Notiflix from 'notiflix';
-Notiflix.Notify.failure('ROJA');
-
-Notiflix.Notify.warning('AMarilla');
-
-Notiflix.Notify.info('Azul');
 import './css/styles.css';
 const imputText = document.getElementById('search-box');
 const countryList = document.querySelector('.country-list');
