@@ -9,9 +9,9 @@ const DEBOUNCE_DELAY = 300;
 let textafterDebounce="a"
 const updateDebounceText = debounce(text=>{
   textafterDebounce= text.trim()
-  console.log("El DEBOUNCE",textafterDebounce)
+  
   if (textafterDebounce.length === 0){
-    console.log("borrar pantalla")
+    //limpiamos pantalla
     countryList.innerHTML = null;
     countryInfo.innerHTML = null;
   
@@ -38,8 +38,8 @@ function debounce(callBack, DEBOUNCE_DELAY){
 imputText.addEventListener('input', e => {
   updateDebounceText(e.target.value)//lo que ingresa lo manda a la constante
   const imputt = e.target;
-  console.log("imputt.value: ",imputt.value);
-  console.log("imputt: ",imputt);
+  /* console.log("imputt.value: ",imputt.value);
+  console.log("imputt: ",imputt); */
   
 });
 
@@ -65,22 +65,18 @@ function countrySearch(imputt) {
 }
 
 function fetchCountries(countryFetched) {
-  
-  console.log('lo que encontramos con el nombre fue:', countryFetched);
-  console.log('cantidad de elementos encontrados:', countryFetched.length);
+//recibimos el retorno de el fetch en json
   if (countryFetched.length === 1) {//card markup???
     /* Notiflix.Notify.success('Sol lucet omnibus'); */
     let foundCountries = countryFetched;
-    console.log('ccfoundCountries contiene:', foundCountries[0].name.common);
+    
     const countryTittle = `<p><img class ="flag-image" src="${foundCountries[0].flags.png}" alt="${foundCountries[0].flags.alt}"width="20"/><h2>${foundCountries[0].name.common}</h2></p>`;
     countryList.innerHTML = countryTittle;
   
     const keyLanguage = Object.values(foundCountries[0].languages);
-    ////quiero sacar el key de este objeto
-    console.log('los values dentro de keyLanguage', keyLanguage);
-    console.log(`aca la posicion numbero 1${keyLanguage[0]}, siguente `);
+   
     const lenguaS = keyLanguage.join(', ');
-    console.log(lenguaS);
+   
     const countryDetails = `<p><b>Capital: </b>${foundCountries[0].capital}</p><p><b>Population: </b>${foundCountries[0].population}</p><p><b>Languages: </b>${lenguaS}</p>`;
     
     countryInfo.innerHTML = countryDetails;
@@ -90,6 +86,7 @@ function fetchCountries(countryFetched) {
   }
   
   if (countryFetched.length<10&&countryFetched.length>2){
+    countryInfo.innerHTML = null;
     let foundCountries = countryFetched
       .map(countryt => {
         return `<li>
